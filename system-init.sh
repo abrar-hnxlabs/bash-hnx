@@ -11,3 +11,6 @@ sudo apt-get install -y certbot\
 		ddclient \
 		software-properties-common \
 		samba
+
+sudo ./upgrade-plex.sh
+sudo ./init.sh
