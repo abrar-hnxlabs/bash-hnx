@@ -19,7 +19,8 @@ read plexpassword
 echo "\nuse=web, web=ipconfig.io\nprotocol=googledomains,\nlogin=$plexusername,\npassword=$plexpassword\nbt.hnxlabs.com" >> /etc/ddclient.conf
 
 systemctl restart ddclient
-
+echo "Sleeping 60 secs for dns propogation"
+sleep 60
 letsencrypt certonly --standalone -d bt.hnxlabs.com,plex.hnxlabs.com 
 
 cp -v smb.simple.conf /etc/samba/smb.conf
@@ -42,3 +43,7 @@ if [[ "$(groups debian-transmission)" =~ .*plex.* ]]; then
 else
 	usermod -a -G plex debian-transmission
 fi
+
+echo "Setting file permissions"
+chown -R abrar:plex /home/abrar/media
+chmod -R 775 /home/abrar/media
