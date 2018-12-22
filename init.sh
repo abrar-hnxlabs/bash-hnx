@@ -5,22 +5,8 @@ if [ "$(whoami)" != "root" ]; then
 	exit 1
 fi
 
-echo "starting ddclient config, get the credentials from google domains"
-echo "provide username for bt.hnxlabs.com"
-read btusername
-echo "provide password for bt.hnxlabs.com"
-read btpassword
-echo "use=web, web=ipconfig.io\nprotocol=googledomains,\nlogin=$btusername,\npassword=$btpassword\nbt.hnxlabs.com" > /etc/ddclient.conf
+./dyn-dns.sh
 
-echo "provide username for plex.hnxlabs.com"
-read plexusername
-echo "provide password for plex.hnxlabs.com"
-read plexpassword
-echo "\nuse=web, web=ipconfig.io\nprotocol=googledomains,\nlogin=$plexusername,\npassword=$plexpassword\nbt.hnxlabs.com" >> /etc/ddclient.conf
-
-systemctl restart ddclient
-echo "Sleeping 60 secs for dns propogation"
-sleep 60
 letsencrypt certonly --standalone -d bt.hnxlabs.com,plex.hnxlabs.com 
 
 cp -v smb.simple.conf /etc/samba/smb.conf
