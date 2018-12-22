@@ -3,6 +3,7 @@
 rootDir="/home/abrar/ubuntu-configs"
 ip=$(curl --silent ipinfo.io/ip)
 ipsize=$(echo -n "$ip" | wc -m)
+echo "$ip"
 if [ -z "$ip" ] || [ $ipsize -gt 15 ]; then
 	echo "Could not get correct ip address"
 	exit 1
