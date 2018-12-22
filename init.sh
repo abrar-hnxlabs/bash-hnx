@@ -22,6 +22,7 @@ if [[ "$(groups abrar)" =~ .*plex.* ]]; then
 	echo "User Already has plex group"
 else
 	usermod -a -G plex abrar
+	usermod -a -G debian-transmission abrar
 fi
 
 if [[ "$(groups debian-transmission)" =~ .*plex.* ]]; then

@@ -8,7 +8,6 @@ sudo apt-get install -y certbot\
 	       	transmission-common \
 	       	transmission-daemon \
 		haproxy \
-		ddclient \
 		software-properties-common \
 		samba
 
