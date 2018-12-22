@@ -8,6 +8,7 @@ _mkpasswd is part of whois tool_
 
 ## OpenSSL
 ### Encryption
+**the openssl tool will ask for a password during encryption, this same password must be used during decryption.**
 ```
 openssl enc -aes256 -base64 -in filename.decrypted -out filename.encrypted
 ```
