@@ -1,7 +1,7 @@
 #! /bin/bash
 
 rootDir="/home/abrar/ubuntu-configs"
-ip=$(curl --silent ipinfo.io/ip)
+ip=$(curl -s ipinfo.io/ip)
 ipsize=$(echo -n "$ip" | wc -m)
 echo "$ip"
 if [ -z "$ip" ] || [ $ipsize -gt 15 ]; then
