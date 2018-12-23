@@ -12,7 +12,8 @@ if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
 	         	transmission-daemon \
 	        	haproxy \
 		        software-properties-common \
-		        samba
+		        samba \
+			whois
 
   sudo ./upgrade-plex.sh
   sudo ./init.sh
