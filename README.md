@@ -27,3 +27,9 @@ _filenames are for illustration purpose, they can have any extension_
 0 */3 * * * /home/abrar/ubuntu-configs/dyn-dns.sh > /var/log/dyn-dns.log
 ```
 
+## Rsync
+```
+sudo mount -t ntfs /dev/sda1 /mnt
+cd /mnt
+rsync -av --progress media ~/
+```
