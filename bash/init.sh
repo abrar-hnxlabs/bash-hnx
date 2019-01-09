@@ -9,9 +9,9 @@ fi
 
 letsencrypt certonly --standalone -d bt.hnxlabs.com,plex.hnxlabs.com 
 
-cp -v smb.simple.conf /etc/samba/smb.conf
-cp -v haproxy.cfg /etc/haproxy/haproxy.cfg
-cp -v transmission-setting.json /etc/transmission-daemon/settings.json
+cp -v ../confs/smb.simple.conf /etc/samba/smb.conf
+cp -v ../confs/haproxy.cfg /etc/haproxy/haproxy.cfg
+cp -v ../confs/transmission-setting.json /etc/transmission-daemon/settings.json
 systemctl reload transmission-daemon.service
 systemctl restart haproxy
 systemctl restart smbd
