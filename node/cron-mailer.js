@@ -9,7 +9,7 @@ const sendGridApiKey = process.env.SENDGRID_API_KEY;
 process.stdin.on('readable', () => {
   const input = process.stdin.read();
   if(input){
-    inputPipe += input;
+    inputPipe += input+'\n';
   }
 });
 
