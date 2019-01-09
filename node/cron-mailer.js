@@ -15,11 +15,12 @@ process.stdin.on('readable', () => {
 
 process.stdin.on('end', async () => {  
   sgMail.setApiKey(sendGridApiKey);
+  const body = inputPipe.split('\n').join('<br />');
   const msg = {
     to: sendToEmail,
     from: 'cron@example.com',
     subject: 'Cron Email Update',
-    html: inputPipe
+    html: body
   };
   try {
     await sgMail.send(msg);
