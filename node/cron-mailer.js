@@ -9,7 +9,7 @@ const sendGridApiKey = process.env.SENDGRID_API_KEY;
 process.stdin.on('readable', () => {
   const input = process.stdin.read();
   if(input){
-    inputPipe += input+'\n';
+    inputPipe += input+'<br />';
   }
 });
 
@@ -19,7 +19,7 @@ process.stdin.on('end', async () => {
     to: sendToEmail,
     from: 'cron@example.com',
     subject: 'Cron Email Update',
-    text: inputPipe
+    html: inputPipe
   };
   try {
     await sgMail.send(msg);
