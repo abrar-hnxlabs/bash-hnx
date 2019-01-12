@@ -11,7 +11,7 @@ const do_renew = async () => {
     domains.forEach((domain) => {
         const fullchain = fs.readFileSync(`/etc/letsencrypt/live/${domain}/fullchain.pem`);
         const privKey = fs.readFileSync(`/etc/letsencrypt/live/${domain}/privkey.pem`);
-        fs.writeFileSync(`/etc/ssl/private/${domain}.pem `)
+        fs.writeFileSync(`/etc/ssl/private/${domain}.pem`, `${fullchain}${privKey}`);
     });
     await exec('systemctl start haproxy.service', { uid: 0});
     console.log(stdout);
