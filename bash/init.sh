@@ -5,8 +5,8 @@ if [ "$(whoami)" != "root" ]; then
 	exit 1
 fi
 
-cd ../node && node dyn-dns.js
-cd ../node && node letsencrypt.js --install
+cd node ../node/index.js --update_dns
+cd node ../node/index.js --install_certs
 
 cp -v ../confs/smb.simple.conf /etc/samba/smb.conf
 cp -v ../confs/haproxy.cfg /etc/haproxy/haproxy.cfg
