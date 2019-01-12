@@ -12,9 +12,12 @@ const do_renew = async () => {
         install_certs();
         haproxy(true);
         if (process.env.SEND_CERTS_MAIL === 'true'){
-            await send('Letsencrypt cron', 'Attempted to update certs');
+            await send('Letsencrypt cron', 'Attempted to renew certs success');
         }
     } catch(exception){
+        if (process.env.SEND_CERTS_MAIL === 'true'){
+            await send('Letsencrypt cron', 'Attempted to renew certs had error,<br />'+JSON.stringify(exception));
+        }
         console.log(exception);
     }
 }
