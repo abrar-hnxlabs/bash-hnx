@@ -14,10 +14,10 @@ program
     
 const do_renew = async () => {
     try {
-        systemctl(false);
+        haproxy(false);
         letsencrypt(true);
         install_certs();
-        systemctl(true);
+        haproxy(true);
         if (process.env.SEND_CERTS_MAIL === 'true'){
             await send('Letsencrypt cron', 'Attempted to update certs');
         }
@@ -28,10 +28,10 @@ const do_renew = async () => {
 
 const do_init = async () => {
     try {
-        systemctl(false);
+        haproxy(false);
         letsencrypt(false);
         install_certs();
-        systemctl(true);
+        haproxy(true);
     } catch(exception){
         console.log(exception);
     }
@@ -45,7 +45,7 @@ const install_certs = () => {
     });
 }
 
-const systemctl = async (start) => {
+const haproxy = async (start) => {
     if(start) {
         await exec('systemctl start haproxy.service', { uid: 0});
     } else {
