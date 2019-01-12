@@ -63,7 +63,7 @@ const letsencrypt = async (renew) => {
 
 if(program.install) {
     do_init();
-} else if ( program.renew) {
+} else if (program.renew) {
     do_renew();
 } else {
     console.log('no command provided');
