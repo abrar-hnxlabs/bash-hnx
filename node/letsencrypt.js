@@ -66,5 +66,5 @@ if(program.install) {
 } else if (program.renew) {
     do_renew();
 } else {
-    console.log('no command provided');
+    console.log('no commands provided, use -h --help for list of commands');
 }
