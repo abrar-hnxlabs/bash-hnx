@@ -13,7 +13,7 @@ const download_package = async () => {
 }
 
 const cleanup = () => {
-    fs.unlinkSync(tmpFileBin)
+    fs.unlinkSync(tmpFileBin);
 }
 const upgradeplex = () => {
     try {
