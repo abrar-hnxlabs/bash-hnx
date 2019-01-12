@@ -15,7 +15,7 @@ const download_package = async () => {
 const cleanup = () => {
     fs.unlinkSync(tmpFileBin);
 }
-const upgradeplex = () => {
+const upgradeplex = async () => {
     try {
         await exec(`dpkg -i ${tmpFileBin}`, { uid: 0 });
         if(process.env.SEND_PLEX_MAIL === 'true' ){
