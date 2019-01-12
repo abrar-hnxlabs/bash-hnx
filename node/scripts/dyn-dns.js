@@ -2,7 +2,7 @@ const axios = require('axios');
 const path = require('path');
 const dnsUpdateUrl = 'https://domains.google.com/nic/update';
 const ipQueryUrl = 'http://ipinfo.io/ip';
-const { send } = require(path.resolve(__dirname,'mail-core.js'));
+const { send } = require(path.resolve(__dirname,'core','mail.js'));
 
 const getIp = async () => {
     const ipResp = await axios.get(ipQueryUrl);

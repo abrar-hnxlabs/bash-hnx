@@ -1,7 +1,7 @@
 const util = require('util');
 const path = require('path');
 const fs = require('fs');
-const { send } = require(path.resolve(__dirname, 'mail-core.js'));
+const { send } = require(path.resolve(__dirname,'core','mail.js'));
 const exec = util.promisify(require('child_process').exec);
 const domains = ['plex.hnxlabs.com', 'bt.hnxlabs.com'];
     

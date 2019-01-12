@@ -2,7 +2,7 @@ const util = require('util');
 const path = require('path');
 const axios = require('axios');
 const fs = require('fs');
-const { send } = require(path.resolve(__dirname, 'mail-core.js'));
+const { send } = require(path.resolve(__dirname,'core','mail.js'));
 const exec = util.promisify(require('child_process').exec);
 
 const downloadUrl = 'https://plex.tv/downloads/latest/1?channel=16&build=linux-ubuntu-x86_64&distro=ubuntu&X-Plex-Token=4Jnu8SqixsEwiJFWK9D4';

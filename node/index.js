@@ -2,9 +2,9 @@ const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env')});
 
 const program = require('commander');
-const { updateDnsRecord } = require(path.resolve(__dirname, 'dyn-dns.js'));
-const { do_init, do_renew } = require(path.resolve(__dirname, 'letsencrypt.js'));
-const { upgradeplex } = require(path.resolve(__dirname, 'plex.js'));
+const { updateDnsRecord } = require(path.resolve(__dirname, 'scripts','dyn-dns.js'));
+const { do_init, do_renew } = require(path.resolve(__dirname, 'scripts', 'letsencrypt.js'));
+const { upgradeplex } = require(path.resolve(__dirname,'scripts', 'plex.js'));
 
 program
     .version('1.0.0')
