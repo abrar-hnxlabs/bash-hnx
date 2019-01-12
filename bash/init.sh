@@ -5,9 +5,8 @@ if [ "$(whoami)" != "root" ]; then
 	exit 1
 fi
 
-./dyn-dns.sh
-
-letsencrypt certonly --standalone -d bt.hnxlabs.com,plex.hnxlabs.com 
+cd ../node && node dyn-dns.js
+cd ../node && node letsencrypt.js --install
 
 cp -v ../confs/smb.simple.conf /etc/samba/smb.conf
 cp -v ../confs/haproxy.cfg /etc/haproxy/haproxy.cfg
