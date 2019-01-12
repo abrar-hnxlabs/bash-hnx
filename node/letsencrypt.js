@@ -17,6 +17,7 @@ const do_renew = async () => {
     console.log(stdout);
     } catch(exception){
         console.log('error while executing commands');
+        console.log(exception);
     }
 }
 
