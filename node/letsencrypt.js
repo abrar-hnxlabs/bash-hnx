@@ -1,16 +1,9 @@
-require('dotenv').config();
-const program = require('commander');
-const util  = require('util');
+const util = require('util');
+const path = require('path');
 const fs = require('fs');
-const { send } = require('./mail-core');
+const { send } = require(path.resolve(__dirname, 'mail-core.js'));
 const exec = util.promisify(require('child_process').exec);
 const domains = ['plex.hnxlabs.com', 'bt.hnxlabs.com'];
-
-program
-    .version('1.0.0')
-    .option('-i --install', 'do intall')
-    .option('-r --renew', 'do renew')
-    .parse(process.argv);
     
 const do_renew = async () => {
     try {
@@ -61,10 +54,4 @@ const letsencrypt = async (renew) => {
     }
 }
 
-if(program.install) {
-    do_init();
-} else if (program.renew) {
-    do_renew();
-} else {
-    console.log('no commands provided, use -h --help for list of commands');
-}
+module.exports = { do_init, do_renew };
