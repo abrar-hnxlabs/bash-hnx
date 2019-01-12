@@ -14,7 +14,6 @@ const do_renew = async () => {
         fs.writeFileSync(`/etc/ssl/private/${domain}.pem`, `${fullchain}${privKey}`);
     });
     await exec('systemctl start haproxy.service', { uid: 0});
-    console.log(stdout);
     } catch(exception){
         console.log('error while executing commands');
         console.log(exception);
