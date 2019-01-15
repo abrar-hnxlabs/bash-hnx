@@ -3,7 +3,11 @@ const path = require('path');
 const dnsUpdateUrl = 'https://domains.google.com/nic/update';
 const ipQueryUrl = 'http://ipinfo.io/ip';
 const { send } = require(path.resolve(__dirname,'core','mail.js'));
+const domains = ['bt.hnxlabs.com', 'plex.hnxlabs.com', 'pihole.hnxlabs.com'];
 
+const getAuthToken = (hostname) => {
+    return process.env[`${hostname.toUpperCase()}.TOKEN`];
+}
 const getIp = async () => {
     const ipResp = await axios.get(ipQueryUrl);
     if(ipResp.data){
@@ -17,32 +21,25 @@ const getIp = async () => {
 
 const updateDnsRecord = async ()=> {
     const ip = await getIp();
-    const dns1 = await axios({
-        method: 'post',
-        url: dnsUpdateUrl,
-        params: {
-            hostname: 'bt.hnxlabs.com',
-            myip: ip
-        },
-        headers: {
-            Authorization: `Basic ${process.env.DYNDNS_AUTH_1}`
-        }
+    const results = [];
+    domains.forEach((hostname) => {
+        const dns = await axios({
+            method: 'post',
+            url: dnsUpdateUrl,
+            params: {
+                hostname: hostname,
+                myip: ip
+            },
+            headers: {
+                Authorization: `Basic ${getAuthToken(hostname)}`
+            }
+        });
+        results.push(dns.data);   
     });
-    const dns2 = await axios({
-        method: 'post',
-        url: dnsUpdateUrl,
-        params: {
-            hostname: 'plex.hnxlabs.com',
-            myip: ip
-        },
-        headers: {
-            Authorization: `Basic ${process.env.DYNDNS_AUTH_2}`
-        }
-    });
-
+   
     try{
         if(process.env.SEND_DNS_MAIL === 'true'){
-            await send('DNS update cron', `${dns1.data}<br />${dns2.data}<br />`);
+            await send('DNS update cron', results.join('<br/>'));
         }
     } catch(e){
         console.log('error while sending email.', e);
