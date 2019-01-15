@@ -22,7 +22,7 @@ const getIp = async () => {
 const updateDnsRecord = async ()=> {
     const ip = await getIp();
     const results = [];
-    domains.forEach((hostname) => {
+    domains.forEach(async (hostname) => {
         const dns = await axios({
             method: 'post',
             url: dnsUpdateUrl,
