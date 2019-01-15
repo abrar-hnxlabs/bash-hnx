@@ -41,6 +41,7 @@ const updateDnsRecord = async ()=> {
         if(process.env.SEND_DNS_MAIL === 'true'){
             await send('DNS update cron', results.join('<br/>'));
         }
+        console.log(results.join('\n'));
     } catch(e){
         console.log('error while sending email.', e);
     }
