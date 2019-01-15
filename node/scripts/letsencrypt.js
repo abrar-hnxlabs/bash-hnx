@@ -7,10 +7,10 @@ const domains = ['plex.hnxlabs.com', 'bt.hnxlabs.com', 'pihole.hnxlabs.com'];
     
 const do_renew = async () => {
     try {
-        haproxy(false);
-        letsencrypt(true);
+        await haproxy(false);
+        await letsencrypt(true);
         install_certs();
-        haproxy(true);
+        await haproxy(true);
         if (process.env.SEND_CERTS_MAIL === 'true'){
             await send('Letsencrypt cron', 'Attempted to renew certs success');
         }
@@ -24,10 +24,10 @@ const do_renew = async () => {
 
 const do_init = async () => {
     try {
-        haproxy(false);
-        letsencrypt(false);
+        await haproxy(false);
+        await letsencrypt(false);
         install_certs();
-        haproxy(true);
+        await haproxy(true);
     } catch(exception){
         console.log(exception);
     }
