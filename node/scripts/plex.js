@@ -22,7 +22,7 @@ const cleanup = () => {
 const upgradeplex = async () => {
     try {
         await download_package();
-        await exec(`dpkg -i ${tmpFileBin}`, { uid: 0 });
+        await exec(`dpkg -i ${tmpFileBin}`, { uid: 0, env: { PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'} });
         if(process.env.SEND_PLEX_MAIL === 'true' ){
             send('Plex upgrade: Success', 'Attempted plex upgrade.');
         }
