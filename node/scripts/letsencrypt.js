@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { send } = require(path.resolve(__dirname,'core','mail.js'));
 const exec = util.promisify(require('child_process').exec);
-const domains = ['plex.hnxlabs.com', 'bt.hnxlabs.com'];
+const domains = ['plex.hnxlabs.com', 'bt.hnxlabs.com', 'pihole.hnxlabs.com'];
     
 const do_renew = async () => {
     try {
