@@ -51,9 +51,9 @@ const haproxy = async (start) => {
 
 const letsencrypt = async (renew) => {
     if(renew){
-        await exec('letsencrypt renew --standalone', { uid: 0});
+        await exec('letsencrypt renew -n --standalone', { uid: 0});
     } else {
-        await exec(`letsencrypt certonly --standalone -d ${domains.join(',')}`, { uid: 0});
+        await exec(`letsencrypt certonly -n --expand --standalone -d ${domains.join(',')}`, { uid: 0});
     }
 }
 
