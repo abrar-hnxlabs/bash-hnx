@@ -22,7 +22,7 @@ const getIp = async () => {
 const updateDnsRecord = async ()=> {
     const ip = await getIp();
     const results = [];
-    domains.forEach(async (hostname) => {
+    for (let hostname of domains) {
         const dns = await axios({
             method: 'post',
             url: dnsUpdateUrl,
@@ -35,7 +35,7 @@ const updateDnsRecord = async ()=> {
             }
         });
         results.push(dns.data);   
-    });
+    };
    
     try{
         if(process.env.SEND_DNS_MAIL === 'true'){
