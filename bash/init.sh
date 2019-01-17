@@ -5,16 +5,9 @@ if [ "$(whoami)" != "root" ]; then
 	exit 1
 fi
 
-cd node ../node/index.js --update_dns
-cd node ../node/index.js --install_certs
-
-cp -v ../confs/smb.simple.conf /etc/samba/smb.conf
-cp -v ../confs/haproxy.cfg /etc/haproxy/haproxy.cfg
-cp -v ../confs/transmission-setting.json /etc/transmission-daemon/settings.json
-systemctl reload transmission-daemon.service
-systemctl restart haproxy
-systemctl restart smbd
-
+node ../node/index.js --update_dns
+node ../node/index.js --install_certs
+node ../node/index.js --apply_config
 echo "adding users to plex group"
 
 if [[ "$(groups abrar)" =~ .*plex.* ]]; then
