@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+if(process.getuid() !== 0) {
+    console.log('must run the app with root user.');
+    process.exit(1);
+}
+
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env')});
 
