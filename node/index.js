@@ -5,6 +5,7 @@ const program = require('commander');
 const { updateDnsRecord } = require(path.resolve(__dirname, 'scripts','dyn-dns.js'));
 const { do_init, do_renew } = require(path.resolve(__dirname, 'scripts', 'letsencrypt.js'));
 const { upgradeplex } = require(path.resolve(__dirname,'scripts', 'plex.js'));
+const { doCopy } = require(path.resolve(__dirname, 'scripts', 'apply-config.js'));
 
 program
     .version('1.0.0')
@@ -12,6 +13,7 @@ program
     .option('-c --install_certs', 'Install new letsencrypt certs')
     .option('-r --renew_certs', 'Renew letsencrypt certs')
     .option('-p --upgrade_plex', 'Upgrade plex installation')
+    .option('-a --apply_config', 'apply system custom config')
     .parse(process.argv);
 
 if(program.update_dns) {
@@ -22,6 +24,9 @@ if(program.update_dns) {
     do_renew();
 } else if(program.upgrade_plex){
     upgradeplex();
-} else {
+} else if(program.apply_config) {
+    doCopy();
+}
+else {
     console.log('use -h --help to get a list of commands');
 }
