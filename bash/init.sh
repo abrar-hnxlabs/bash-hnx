@@ -5,9 +5,10 @@ if [ "$(whoami)" != "root" ]; then
 	exit 1
 fi
 
-node ../node/index.js --update_dns
-node ../node/index.js --install_certs
-node ../node/index.js --apply_config
+ln -s /home/abrar/ubuntu-configs/node/bin/app /bin/myapp
+myapp --update_dns
+myapp --install_certs
+myapp --apply_config
 echo "adding users to plex group"
 
 if [[ "$(groups abrar)" =~ .*plex.* ]]; then
