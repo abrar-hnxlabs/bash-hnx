@@ -69,6 +69,6 @@ func main() {
 	root.add(12);
 	root.add(7);
 	
-	fmt.Println(root.find(8));
+	fmt.Println(root.find(1));
 	root.print();
 }
