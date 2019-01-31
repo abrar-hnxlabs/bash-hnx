@@ -9,7 +9,7 @@ type node struct {
 
 type btree interface {
 	add(val int)
-	remove(val int)
+	// remove(val int)
 	find(val int)
 	print()
 }
@@ -30,10 +30,6 @@ func (root *node) add(val int) {
 			root.right.add(val);
 		}
 	}
-}
-
-func (root *node) remove(val int) int {
-	return 1
 }
 
 func (root *node) find(val int) *node {
