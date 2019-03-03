@@ -33,3 +33,14 @@ sudo mount -t ntfs /dev/sda1 /mnt
 cd /mnt
 rsync -av --progress media ~/
 ```
+
+## Fstab - Auto mount external hdd on boot
+Get the UUID of the disk to mount , run the below command
+```
+sudo blkid
+```
+
+Edit the fstab
+```
+UUID=uuidfromblkid  /mnt/hdd ntfs defaults,nofail 0 0
+```
