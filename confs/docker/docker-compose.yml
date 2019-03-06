@@ -45,7 +45,7 @@ services:
       TZ: "America/Los_Angeles"
     volumes:
       - "/home/abrar/docker/transmission/config:/config"
-      - "/home/abrar/media"
+      - "/home/abrar/media:/downloads"
     ports:
       - "9091:9091"
       - "51413:51413"
