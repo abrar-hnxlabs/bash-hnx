@@ -74,13 +74,15 @@ services:
     volumes:
       - "/home/abrar/docker/ocdata:/mnt/data"
   ocdb:
-    image: "mariadb"
+    image: "webhippie/mariadb:latest"
     restart: "unless-stopped"
     environment:
-      MYSQL_ROOT_PASSWORD: "temp1234"
-      MYSQL_USER: "ocuser"
-      MYSQL_PASSWORD: "octemppassword"
-      MYSQL_DATABASE: "owncloud"
+      MARIADB_ROOT_PASSWORD: "temp1234"
+      MARIADB_USERNAME: "ocuser"
+      MARIADB_PASSWORD: "octemppassword"
+      MARIADB_DATABASE: "owncloud"
+      MARIADB_MAX_ALLOWED_PACKET: "128M"
+      MARIADB_INNODB_LOG_FILE_SIZE: "64M"
     volumes:
       - "/home/abrar/docker/ocdb:/var/lib/mysql"
   ocredis:
