@@ -34,8 +34,8 @@ services:
       - "/home/abrar/docker/pihole:/etc/pihole"
       - "/home/abrar/docker/pihole/dnsmasq.d:/etc/dnsmasq.d"
     dns:
-      - "127.0.0.1"
-      - "8.8.8.8"
+      - 127.0.0.1
+      - 8.8.8.8
   transmission:
     image: linuxserver/transmission
     environment:
