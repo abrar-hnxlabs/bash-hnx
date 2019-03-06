@@ -63,6 +63,7 @@ services:
       - "ocdb"
       - "ocredis"
     environment:
+      OWNCLOUD_DOMAIN: "oc.hnxlabs.com"
       OWNCLOUD_DB_TYPE: "mysql"
       OWNCLOUD_DB_NAME: "owncloud"
       OWNCLOUD_DB_HOST: "ocdb"
