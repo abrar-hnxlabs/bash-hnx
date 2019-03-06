@@ -1,0 +1,15 @@
+version: '3'
+services:
+  plex:
+    image: "plexinc/pms-docker"
+    restart: always
+    environment:
+      TZ: "Americas/Los_Angeles"
+      PLEX_CLAIM: "TOKEN"
+      ADVERTISE_IP: "https://plex.hnxlabs.com"
+    volumes:
+      - "/home/abrar/media:/data"
+      - "/home/abrar/media/transcode:/transcode"
+      - "/home/abrar/plex/config:/config"
+    ports:
+      - "32400:32400/tcp"
