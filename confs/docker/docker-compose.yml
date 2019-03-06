@@ -2,7 +2,7 @@ version: "3"
 services:
   plex:
     image: "plexinc/pms-docker"
-    restart: "always"
+    restart: "unless-stopped"
     environment:
       TZ: "America/Los_Angeles"
       ADVERTISE_IP: "https://plex.hnxlabs.com"
@@ -22,7 +22,7 @@ services:
       - "32414:32414/udp"
   pihole:
     image: "pihole/pihole"
-    restart: "always"
+    restart: "unless-stopped"
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -37,4 +37,18 @@ services:
     dns:
       - "127.0.0.1"
       - "8.8.8.8"
+  transmission:
+    image: linuxserver/transmission
+    environment:
+      PUID: 1000
+      PGID: 119
+      TZ: "America/Los_Angeles"
+    volumes:
+      - "/home/abrar/docker/transmission/config:/config"
+      - "/home/abrar/media"
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+    restart: "unless-stopped"
 
