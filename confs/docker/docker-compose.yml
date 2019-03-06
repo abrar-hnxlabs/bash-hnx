@@ -60,15 +60,15 @@ services:
     ports:
       - "8082:80"
     depends_on:
-      - ocdb
-      - ocredis
+      - "ocdb"
+      - "ocredis"
     environment:
-      OWNCLOUD_DB_TYPE: mysql
-      OWNCLOUD_DB_NAME: owncloud
-      OWNCLOUD_DB_HOST: ocdb
-      OWNCLOUD_MYSQL_UTF8MB4: true
-      OWNCLOUD_REDIS_ENABLED: true
-      OWNCLOUD_REDIS_HOST: ocredis
+      OWNCLOUD_DB_TYPE: "mysql"
+      OWNCLOUD_DB_NAME: "owncloud"
+      OWNCLOUD_DB_HOST: "ocdb"
+      OWNCLOUD_MYSQL_UTF8MB4: "true"
+      OWNCLOUD_REDIS_ENABLED: "true"
+      OWNCLOUD_REDIS_HOST: "ocredis"
     volumes:
       - "/home/abrar/docker/ocdata:/mnt/data"
   ocdb:
