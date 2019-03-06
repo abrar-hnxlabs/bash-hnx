@@ -58,7 +58,7 @@ services:
     image: "owncloud/server"
     restart: "unless-stopped"
     ports:
-      - "8082:80"
+      - "8082:8080/tcp"
     depends_on:
       - "ocdb"
       - "ocredis"
