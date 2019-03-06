@@ -1,3 +1,4 @@
 *.dec
 .env
+*.env
 node_modules

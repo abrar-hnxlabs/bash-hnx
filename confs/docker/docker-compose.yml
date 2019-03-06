@@ -3,12 +3,8 @@ services:
   plex:
     image: "plexinc/pms-docker"
     restart: "unless-stopped"
-    environment:
-      TZ: "America/Los_Angeles"
-      ADVERTISE_IP: "https://plex.hnxlabs.com"
-      PLEX_UID: 1000
-      PLEX_GID: 119
-      PLEX_CLAIM: "claim-czWtebqPZPjKX9tBJQQc" 
+    env_file:
+      - "plex.env"
     volumes:
       - "/home/abrar/media:/data"
       - "/home/abrar/media/transcode:/transcode"
@@ -62,28 +58,15 @@ services:
     depends_on:
       - "ocdb"
       - "ocredis"
-    environment:
-      OWNCLOUD_DOMAIN: "oc.hnxlabs.com"
-      OWNCLOUD_DB_TYPE: "mysql"
-      OWNCLOUD_DB_NAME: "owncloud"
-      OWNCLOUD_DB_HOST: "ocdb"
-      OWNCLOUD_DB_USERNAME: "ocuser"
-      OWNCLOUD_DB_PASSWORD: "octemppassword"
-      OWNCLOUD_MYSQL_UTF8MB4: "true"
-      OWNCLOUD_REDIS_ENABLED: "true"
-      OWNCLOUD_REDIS_HOST: "ocredis"
+    env_file:
+      - "owncloud.env"
     volumes:
       - "/home/abrar/docker/ocdata:/mnt/data"
   ocdb:
     image: "webhippie/mariadb:latest"
     restart: "unless-stopped"
-    environment:
-      MARIADB_ROOT_PASSWORD: "temp1234"
-      MARIADB_USERNAME: "ocuser"
-      MARIADB_PASSWORD: "octemppassword"
-      MARIADB_DATABASE: "owncloud"
-      MARIADB_MAX_ALLOWED_PACKET: "128M"
-      MARIADB_INNODB_LOG_FILE_SIZE: "64M"
+    env_file:
+      - "ocdb.env"
     volumes:
       - "/home/abrar/docker/ocdb:/var/lib/mysql"
   ocredis:
