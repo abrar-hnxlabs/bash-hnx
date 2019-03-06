@@ -1,15 +1,32 @@
-version: '3'
+version: "3"
 services:
   plex:
     image: "plexinc/pms-docker"
-    restart: always
+    restart: "always"
     environment:
-      TZ: "Americas/Los_Angeles"
-      PLEX_CLAIM: "TOKEN"
+      TZ: "America/Los_Angeles"
       ADVERTISE_IP: "https://plex.hnxlabs.com"
     volumes:
       - "/home/abrar/media:/data"
       - "/home/abrar/media/transcode:/transcode"
-      - "/home/abrar/plex/config:/config"
+      - "/home/abrar/docker/plex/config:/config"
     ports:
       - "32400:32400/tcp"
+  pihole:
+    image: "pihole/pihole"
+    restart: "always"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "8081:80/tcp"
+      - "80443:443/tcp"
+    environment:
+      TZ: "America/Los_Angeles"
+    volumes:
+      - "/home/abrar/docker/pihole:/etc/pihole"
+      - "/home/abrar/docker/pihole/dnsmasq.d:/etc/dnsmasq.d"
+    dns:
+      - "127.0.0.1"
+      - "8.8.8.8"
+
