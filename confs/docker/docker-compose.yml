@@ -54,4 +54,34 @@ services:
       - "51413:51413"
       - "51413:51413/udp"
     restart: "unless-stopped"
+  owncloud:
+    image: "owncloud/server"
+    restart: "unless-stopped"
+    ports:
+      - "8082:80"
+    depends_on:
+      - ocdb
+      - ocredis
+    environment:
+      OWNCLOUD_DB_TYPE: mysql
+      OWNCLOUD_DB_NAME: owncloud
+      OWNCLOUD_DB_HOST: ocdb
+      OWNCLOUD_MYSQL_UTF8MB4: true
+      OWNCLOUD_REDIS_ENABLED: true
+      OWNCLOUD_REDIS_HOST: ocredis
+    volumes:
+      - "/home/abrar/docker/ocdata:/mnt/data"
+  ocdb:
+    image: "mariadb"
+    restart: "unless-stopped"
+    environment:
+      MYSQL_ROOT_PASSWORD: "temp1234"
+      MYSQL_USER: "ocuser"
+      MYSQL_PASSWORD: "octemppassword"
+    volumes:
+      - "/home/abrar/docker/ocdb:/var/lib/mysql"
+  ocredis:
+    image: "redis:alpine"
+    restart: "unless-stopped"
+
 
