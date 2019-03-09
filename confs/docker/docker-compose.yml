@@ -72,7 +72,7 @@ services:
       URL: "hnxlabs.com"
       SUBDOMAINS: "plex,bt,pihole"
       VALIDATION: "http"
-      STAGING: "true"
+      STAGING: "false"
       ONLY_SUBDOMAINS: "true"
     volumes:
       - "/home/abrar/docker/letsencrypt:/config"
