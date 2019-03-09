@@ -39,7 +39,7 @@ services:
     image: "linuxserver/transmission"
     environment:
       PUID: 1000
-      PGID: 119
+      PGID: 998
       TZ: "America/Los_Angeles"
     volumes:
       - "/home/abrar/docker/transmission/config:/config"
@@ -67,7 +67,7 @@ services:
     restart: "unless-stopped"
     environment:
       PUID: 1000
-      PGID: 119
+      PGID: 998
       TZ: "America/Los_angeles"
       URL: "hnxlabs.com"
       SUBDOMAINS: "plex,bt,pihole"
