@@ -75,6 +75,7 @@ services:
       SUBDOMAINS: "plex,bt"
       VALIDATION: "http"
       STAGING: "true"
+      ONLY_SUBDOMAINS: "true"
     volumes:
       - "/home/abrar/docker/letsencrypt:/config"
     ports:
