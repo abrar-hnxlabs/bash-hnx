@@ -38,7 +38,7 @@ services:
       - 127.0.0.1
       - 8.8.8.8
   transmission:
-    image: linuxserver/transmission
+    image: "linuxserver/transmission"
     environment:
       PUID: 1000
       PGID: 119
@@ -51,27 +51,32 @@ services:
       - "51413:51413"
       - "51413:51413/udp"
     restart: "unless-stopped"
-  owncloud:
-    image: "owncloud/server"
+  haproxy:
+    image: 'haproxy:alpine'
     restart: "unless-stopped"
-    ports:
-      - "8082:8080/tcp"
     depends_on:
-      - "ocdb"
-      - "ocredis"
-    env_file:
-      - "owncloud.env"
+      - plex
+      - transmission
+      - letsencrypt
+      - pihole
     volumes:
-      - "/home/abrar/docker/ocdata:/mnt/data"
-  ocdb:
-    image: "webhippie/mariadb:latest"
+      - "/home/abrar/ubuntu-configs/conf:/usr/local/etc/haproxy:ro"
+    ports:
+      - "443:443"
+      - "80:80"
+  letsencrypt:
+    image: "linuxserver/letsencrypt"
     restart: "unless-stopped"
-    env_file:
-      - "ocdb.env"
+    environment:
+      PUID: 1000
+      PGID: 119
+      TZ: "America/Los_angeles"
+      URL: "hnxlabs.com"
+      SUBDOMAINS: "plex,bt"
+      VALIDATION: "http"
+      STAGING: "true"
     volumes:
-      - "/home/abrar/docker/ocdb:/var/lib/mysql"
-  ocredis:
-    image: "redis:alpine"
-    restart: "unless-stopped"
-
-
+      - "/home/abrar/docker/letsencrypt:/config"
+    ports:
+      - "8082:80"
+      - "8083:443"
