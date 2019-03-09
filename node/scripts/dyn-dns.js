@@ -3,7 +3,7 @@ const path = require('path');
 const dnsUpdateUrl = 'https://domains.google.com/nic/update';
 const ipQueryUrl = 'http://ipinfo.io/ip';
 const { send } = require(path.resolve(__dirname,'core','mail.js'));
-const domains = ['bt.hnxlabs.com', 'plex.hnxlabs.com', 'pihole.hnxlabs.com'];
+const domains = ['plex.hnxlabs.com'];
 
 const getAuthToken = (hostname) => {
     return process.env[`${hostname.toUpperCase()}.TOKEN`];
