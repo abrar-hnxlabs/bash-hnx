@@ -60,7 +60,7 @@ services:
       - letsencrypt
       - pihole
     volumes:
-      - "/home/abrar/ubuntu-configs/conf:/usr/local/etc/haproxy:ro"
+      - "/home/abrar/ubuntu-configs/confs:/usr/local/etc/haproxy:ro"
     ports:
       - "443:443"
       - "80:80"
