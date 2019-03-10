@@ -3,7 +3,6 @@ services:
   plex:
     image: "plexinc/pms-docker"
     restart: "unless-stopped"
-    user: "1000:998"
     env_file:
       - "plex.env"
     volumes:
