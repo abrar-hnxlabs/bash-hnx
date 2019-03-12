@@ -44,3 +44,31 @@ Edit the fstab
 ```
 UUID=uuidfromblkid  /mnt/hdd ntfs defaults,nofail 0 0
 ```
+
+
+## fail2ban
+
+Install 
+```
+sudo apt-get install fail2ban
+```
+
+Config Dir
+```
+/etc/fail2ban/jail.d/defaults-debian.con
+```
+Config
+```
+[sshd]
+enabled = true
+port = 22
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+ignoreip = 192.168.0.0/24
+```
+
+Unban ip's
+```
+sudo fail2ban-client set sshd unbanip IP_ADDRESS
+```
