@@ -11,6 +11,7 @@ services:
       - "/home/abrar/docker/plex/config:/config"
     ports:
       - "1900:1900/udp"
+      - "5353:5353/udp"
       
   pihole:
     image: "pihole/pihole"
