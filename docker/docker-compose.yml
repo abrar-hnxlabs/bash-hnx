@@ -9,12 +9,7 @@ services:
       - "/home/abrar/media:/data:ro"
       - "/home/abrar/media/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
-    ports:
-      - "1900:1900/udp"
-      - "32469:32469/tcp"
-      - "32469:32469/udp"
-      - "5353:5353/udp"
-      
+
   pihole:
     image: "pihole/pihole"
     restart: "unless-stopped"
