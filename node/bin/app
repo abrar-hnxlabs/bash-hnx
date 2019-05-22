@@ -1,9 +1,4 @@
 #!/usr/bin/env node
-if(process.getuid() !== 0) {
-    console.log('must run the app with root user.');
-    process.exit(1);
-}
-
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env')});
 
@@ -19,9 +14,17 @@ program
     .option('-t --transcode <inputFile>', 'transcode to h265 10 bit video')
     .parse(process.argv);
 
+function isRootUser() {
+    return process.getuid() === 0;
+}
+
 if(program.update_dns) {
     updateDnsRecord();
 } else if(program.apply_config) {
+    if(!isRootUser){
+        console.log('This operation requires root User. Run again as root.');
+        process.exit(-1);
+    }
     doCopy();
 } else if(program.transcode){
     execEncode(program.transcode)
