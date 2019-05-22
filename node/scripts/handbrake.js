@@ -9,12 +9,13 @@ const execEncode = async (inputfilePath) => {
     try {
         //const handbrake = spawn('/usr/bin/HandBrakeCLI', [`-f av_mkv -e x265_10bit -E eac3 -i '${inputfilePath}' -o '${output}'`], { stdio: 'inherit'});
         const args = [
+            'usr/bin/HandBrakeCLI',
             '-f av_mkv',
             '-e x265_10bit',
             `-i '${inputfilePath}'`,
             `-o '${output}'`
         ]
-        await execSync('/usr/bin/HandBrakeCLI', args, { stdio: 'inherit' });
+        await execSync( args.join(' '), { stdio: 'inherit' });
     } catch (e){
         console.log('Error while exec handbrake', e);
     }
