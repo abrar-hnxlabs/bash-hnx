@@ -8,7 +8,7 @@ const execEncode = async (inputfilePath) => {
     const output = `${baseDir}/output-transcode-h265.mkv`;
     try {
         //const handbrake = spawn('/usr/bin/HandBrakeCLI', [`-f av_mkv -e x265_10bit -E eac3 -i '${inputfilePath}' -o '${output}'`], { stdio: 'inherit'});
-        await exec('/usr/bin/HandBrakeCLI', [`-f av_mkv -e x265_10bit -E eac3 -i "${inputfilePath}" -o "${output}"`], { stdio: 'inherit'} );
+        await exec(`/usr/bin/HandBrakeCLI -f av_mkv -e x265_10bit -E eac3 -i "${inputfilePath}" -o "${output}"`, [], { stdio: 'inherit'} );
     } catch (e){
         console.log('Error while exec handbrake', e.code);
     }
