@@ -9,7 +9,7 @@ const execEncode = async (inputfilePath) => {
     try {
         //const handbrake = spawn('/usr/bin/HandBrakeCLI', [`-f av_mkv -e x265_10bit -E eac3 -i '${inputfilePath}' -o '${output}'`], { stdio: 'inherit'});
         const args = [
-            'usr/bin/HandBrakeCLI',
+            '/usr/bin/HandBrakeCLI',
             '-f av_mkv',
             '-e x265_10bit',
             `-i '${inputfilePath}'`,
