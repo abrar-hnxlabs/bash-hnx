@@ -1,7 +1,7 @@
 const util = require('util');
 const path = require('path');
 const exec = util.promisify(require('child_process').execFile);
-const { spawn } = require('child_process').execFile;
+const { spawn } = require('child_process').execFileSync;
 
 const execEncode = async (inputfilePath) => {
     const baseDir = path.dirname(inputfilePath);
