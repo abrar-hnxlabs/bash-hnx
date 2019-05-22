@@ -3,11 +3,9 @@ const { execSync } = require('child_process');
 
 const execEncode = async (inputfilePath) => {
     inputfilePath = path.normalize(inputfilePath);
-    const baseDir = path.dirname(inputfilePath);
-    const ext = path.extname(inputfilePath);
-    const fileName = path.basename(inputfilePath, ext);
+    const baseFileObj = path.parse(inputfilePath);
     
-    const output = `${baseDir}/${fileName}-transcode.mkv`;
+    const output = `${baseFileObj.dir}/${baseFileObj.name}-transcode.mkv`;
     try {
         const args = [
             '/usr/bin/HandBrakeCLI',
