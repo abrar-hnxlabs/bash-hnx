@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 const execEncode = async (inputfilePath) => {
     inputfilePath = path.normalize(inputfilePath);
     const baseDir = path.dirname(inputfilePath);
-    const ext = path.ext(inputfilePath);
+    const ext = path.extname(inputfilePath);
     const fileName = path.basename(inputfilePath, ext);
     
     const output = `${baseDir}/${fileName}-transcode.mkv`;
