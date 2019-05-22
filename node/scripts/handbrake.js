@@ -11,6 +11,7 @@ const execEncode = async (inputfilePath) => {
             '/usr/bin/HandBrakeCLI',
             '-f av_mkv',
             '-e x265_10bit',
+            '-E eac3',
             `-i '${inputfilePath}'`,
             `-o '${output}'`
         ]
