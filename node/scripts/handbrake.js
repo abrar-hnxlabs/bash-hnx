@@ -1,7 +1,7 @@
 const util = require('util');
 const path = require('path');
 const exec = util.promisify(require('child_process').execFile);
-// const { spawn } = require('child_process');
+const { spawn } = require('child_process').execFile;
 
 const execEncode = async (inputfilePath) => {
     const baseDir = path.dirname(inputfilePath);
@@ -11,10 +11,10 @@ const execEncode = async (inputfilePath) => {
         const args = [
             '-f av_mkv',
             '-e x265_10bit',
-            `-i "${inputfilePath}"`,
-            `-o "${output}"`
+            `-i '${inputfilePath}'`,
+            `-o '${output}'`
         ]
-        await exec('/usr/bin/HandBrakeCLI', args);
+        await spawn('/usr/bin/HandBrakeCLI', args);
     } catch (e){
         console.log('Error while exec handbrake', e);
     }
