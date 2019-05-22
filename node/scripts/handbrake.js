@@ -1,7 +1,7 @@
 const path = require('path');
 const { execSync } = require('child_process');
 
-const execEncode = async (inputfilePath) => {
+const execEncode = (inputfilePath) => {
     inputfilePath = path.normalize(inputfilePath);
     const baseFileObj = path.parse(inputfilePath);
     
@@ -15,7 +15,7 @@ const execEncode = async (inputfilePath) => {
             `-i '${inputfilePath}'`,
             `-o '${output}'`
         ]
-        await execSync( args.join(' '), { stdio: 'inherit' });
+        execSync( args.join(' '), { stdio: 'inherit' });
     } catch (e){
         console.log('Error while exec handbrake', e);
     }
