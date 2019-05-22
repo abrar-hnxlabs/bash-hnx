@@ -10,17 +10,21 @@ require('dotenv').config({ path: path.resolve(__dirname, '.env')});
 const program = require('commander');
 const { updateDnsRecord } = require(path.resolve(__dirname, '..' ,'scripts','dyn-dns.js'));
 const { doCopy } = require(path.resolve(__dirname, '..' ,'scripts', 'apply-config.js'));
+const { execEncode } = require(path.resolve(__dirname, '..' ,'scripts', 'handbrake.js'));
 
 program
     .version('1.0.0')
     .option('-d --update_dns', 'Update the dynmic dns record')
     .option('-a --apply_config', 'apply system custom config')
+    .option('-t --transcode <inputFile>', 'transcode to h265 10 bit video')
     .parse(process.argv);
 
 if(program.update_dns) {
     updateDnsRecord();
 } else if(program.apply_config) {
     doCopy();
+} else if(program.transcode){
+    execEncode(program.transcode)
 }
 else {
     console.log('use -h --help to get a list of commands');
