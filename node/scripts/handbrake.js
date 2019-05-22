@@ -1,6 +1,6 @@
 const util = require('util');
 const path = require('path');
-const exec = util.promisify(require('child_process').execFile);
+const exec = util.promisify(require('child_process').execFileSync);
 // const { spawn } = require('child_process');
 
 const execEncode = async (inputfilePath) => {
@@ -16,7 +16,7 @@ const execEncode = async (inputfilePath) => {
         ]
         await exec('/usr/bin/HandBrakeCLI', args);
     } catch (e){
-        console.log('Error while exec handbrake', e.code);
+        console.log('Error while exec handbrake', e);
     }
 }
 
