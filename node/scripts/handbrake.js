@@ -1,13 +1,15 @@
 const util = require('util');
 const path = require('path');
-const exec = util.promisify(require('child_process').execFile);
 const { execSync } = require('child_process');
 
 const execEncode = async (inputfilePath) => {
+    inputfilePath = path.normalize(inputfilePath);
     const baseDir = path.dirname(inputfilePath);
-    const output = `${baseDir}/output-transcode-h265.mkv`;
+    const ext = path.ext(inputfilePath);
+    const fileName = path.basename(inputfilePath, ext);
+    
+    const output = `${baseDir}/${fileName}-transcode.mkv`;
     try {
-        //const handbrake = spawn('/usr/bin/HandBrakeCLI', [`-f av_mkv -e x265_10bit -E eac3 -i '${inputfilePath}' -o '${output}'`], { stdio: 'inherit'});
         const args = [
             '/usr/bin/HandBrakeCLI',
             '-f av_mkv',
