@@ -10,7 +10,7 @@ const execEncode = (inputfilePath) => {
         const args = [
             '/usr/local/bin/HandBrakeCLI',
             '-f av_mkv',
-            '-e x265_10bit',
+            '-e x264',
             '-E eac3',
             `-i '${inputfilePath}'`,
             `-o '${output}'`
