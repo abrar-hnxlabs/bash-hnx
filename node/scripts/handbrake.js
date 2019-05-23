@@ -8,7 +8,7 @@ const execEncode = (inputfilePath) => {
     const output = `${baseFileObj.dir}/${baseFileObj.name}-transcode.mkv`;
     try {
         const args = [
-            '/usr/bin/HandBrakeCLI',
+            '/usr/local/bin/HandBrakeCLI',
             '-f av_mkv',
             '-e x265_10bit',
             '-E eac3',
