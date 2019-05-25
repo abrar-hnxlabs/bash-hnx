@@ -1,6 +1,16 @@
 #! /bin/bash
 
 packages=`apt list --installed | awk -F '/' '{ print $1 }'`
+
+if [ $1 == "-l" ]
+then
+	for pack in $packages
+	do 
+		printf "$pack\n"
+	done
+	exit 0
+fi
+
 for pack in $packages
 do
 	printf "Uninstall $pack ? y/n/q: \n"
@@ -11,6 +21,6 @@ do
 	elif [ $inputval == "Q" ] || [ $inputval == "q" ]
 	then
 		printf "Quitting\n"
-		break
+		exit 0
 	fi
 done
