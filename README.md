@@ -29,9 +29,11 @@ _filenames are for illustration purpose, they can have any extension_
 
 ## Rsync
 ```
-sudo mount -t ntfs /dev/sda1 /mnt
+sudo mount -t ntfs /dev/sdb1 /mnt
 cd /mnt
-rsync -av --progress media ~/
+rsync -av --progress ~/media backup
+
+use -n for dry run
 ```
 
 ## Fstab - Auto mount external hdd on boot
