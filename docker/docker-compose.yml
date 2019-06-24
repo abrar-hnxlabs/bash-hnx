@@ -28,19 +28,6 @@ services:
       - 8.8.8.8
     extra_hosts:
       - "plex.hnxlabs.com:192.168.0.7"
-  # transmission:
-  #   image: "linuxserver/transmission"
-  #   environment:
-  #     PUID: 1000
-  #     PGID: 998
-  #     TZ: "America/Los_Angeles"
-  #   volumes:
-  #     - "/home/abrar/docker/transmission/config:/config"
-  #     - "/home/abrar/media:/downloads"
-  #   ports:
-  #     - "51413:51413"
-  #     - "51413:51413/udp"
-  #   restart: "unless-stopped"
   haproxy:
     image: 'haproxy:alpine'
     restart: "unless-stopped"
