@@ -28,25 +28,25 @@ services:
       - 8.8.8.8
     extra_hosts:
       - "plex.hnxlabs.com:192.168.0.7"
-  transmission:
-    image: "linuxserver/transmission"
-    environment:
-      PUID: 1000
-      PGID: 998
-      TZ: "America/Los_Angeles"
-    volumes:
-      - "/home/abrar/docker/transmission/config:/config"
-      - "/home/abrar/media:/downloads"
-    ports:
-      - "51413:51413"
-      - "51413:51413/udp"
-    restart: "unless-stopped"
+  # transmission:
+  #   image: "linuxserver/transmission"
+  #   environment:
+  #     PUID: 1000
+  #     PGID: 998
+  #     TZ: "America/Los_Angeles"
+  #   volumes:
+  #     - "/home/abrar/docker/transmission/config:/config"
+  #     - "/home/abrar/media:/downloads"
+  #   ports:
+  #     - "51413:51413"
+  #     - "51413:51413/udp"
+  #   restart: "unless-stopped"
   haproxy:
     image: 'haproxy:alpine'
     restart: "unless-stopped"
     depends_on:
       - plex
-      - transmission
+      - transmission-openvpn
       - letsencrypt
       - pihole
     volumes:
@@ -71,3 +71,15 @@ services:
       ONLY_SUBDOMAINS: "true"
     volumes:
       - "/home/abrar/docker/letsencrypt:/config"
+  transmission-openvpn:
+    image: "haugene/transmission-openvpn"
+    restart: "unless-stopped"
+    volumes:
+      - "/home/abrar/docker/transmission/config:/config"
+      - "/home/abrar/media:/downloads"
+      - "/etc/localtime:/etc/localtime:ro"
+    env_file:
+      - "transmission.env"
+    cap_add:
+      - NET_ADMIN
+
