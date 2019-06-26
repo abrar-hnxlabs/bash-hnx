@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [ "$(whoami)" != "root" ]; then
+	echo "Must run script as root to execute"
+	exit 1
+fi
+
 echo "Confirm you want to start system init? Y/N"
 read answer
 if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
@@ -18,5 +23,10 @@ if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
   curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
   sudo apt-get install -y nodejs
-  sudo ./init.sh
+  
+  ln -s /home/abrar/ubuntu-configs/node/bin/app /bin/myapp
+  myapp --update_dns
+  myapp --apply_config
+  echo "Setting file permissions"
+  chmod -R 775 /home/abrar/media
 fi

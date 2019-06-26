@@ -2,7 +2,6 @@ const axios = require('axios');
 const path = require('path');
 const dnsUpdateUrl = 'https://domains.google.com/nic/update';
 const ipQueryUrl = 'http://ipinfo.io/ip';
-const { send } = require(path.resolve(__dirname,'core','mail.js'));
 const domains = ['plex.hnxlabs.com'];
 
 const getAuthToken = (hostname) => {
@@ -36,15 +35,6 @@ const updateDnsRecord = async ()=> {
         });
         results.push(dns.data);   
     };
-   
-    try{
-        if(process.env.SEND_DNS_MAIL === 'true'){
-            await send('DNS update cron', results.join('<br/>'));
-        }
-        console.log(results.join('\n'));
-    } catch(e){
-        console.log('error while sending email.', e);
-    }
 }
 
 module.exports = { updateDnsRecord };

@@ -1,17 +1,37 @@
 #!/usr/bin/env node
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '.env')});
-
 const program = require('commander');
+const winston = require('winston');
+
 const { updateDnsRecord } = require(path.resolve(__dirname, '..' ,'scripts','dyn-dns.js'));
 const { doCopy } = require(path.resolve(__dirname, '..' ,'scripts', 'apply-config.js'));
 const { execEncode } = require(path.resolve(__dirname, '..' ,'scripts', 'handbrake.js'));
+const { encrypt, decrypt } = require(path.resolve(__dirname, '..' ,'scripts', 'openssl.js'));
+
+
+global.log = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    transports: [
+        new winston.transports.Console(),
+        new winston.transports.File({ filename: './app.log' })
+    ]
+});
+
+log.on('finish', function (info) {
+    // All `info` log messages has now been logged
+    process.exit(0);
+});
+
+log.info("starting app.");
 
 program
     .version('1.0.0')
-    .option('-d --update_dns', 'Update the dynmic dns record')
+    .option('-u --update_dns', 'Update the dynmic dns record')
     .option('-a --apply_config', 'apply system custom config')
     .option('-t --transcode <inputFile>', 'transcode to h265 10 bit video')
+    .option('-e --encrypt <inputFile>', 'encrypt file')
+    .option('-d --decrypt <inputFile>', 'decrypt file')
     .parse(process.argv);
 
 function isRootUser() {
@@ -28,7 +48,12 @@ if(program.update_dns) {
     doCopy();
 } else if(program.transcode){
     execEncode(program.transcode)
+} else if(program.encrypt){
+    encrypt(program.encrypt)
+} else if(program.decrypt){
+    decrypt(program.decrypt)
 }
 else {
     console.log('use -h --help to get a list of commands');
 }
+log.end();

@@ -37,7 +37,7 @@ services:
       - letsencrypt
       - pihole
     volumes:
-      - "/home/abrar/ubuntu-configs/confs:/usr/local/etc/haproxy:ro"
+      - "/home/abrar/ubuntu-configs/docker/configs:/usr/local/etc/haproxy:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
       - "/var/lib/haproxy/dev/log:/dev/log"
     ports:
@@ -58,7 +58,7 @@ services:
       ONLY_SUBDOMAINS: "true"
     volumes:
       - "/home/abrar/docker/letsencrypt:/config"
-  transmission-openvpn:
+  transmission:
     image: "haugene/transmission-openvpn"
     restart: "unless-stopped"
     volumes:
