@@ -65,7 +65,6 @@ services:
     image: "haugene/transmission-openvpn"
     restart: "unless-stopped"
     volumes:
-      - "/home/abrar/docker/transmission/config:/config"
       - "/home/abrar/media:/downloads"
       - "/etc/localtime:/etc/localtime:ro"
     env_file:
