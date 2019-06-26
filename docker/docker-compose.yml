@@ -28,12 +28,13 @@ services:
       - 8.8.8.8
     extra_hosts:
       - "plex.hnxlabs.com:192.168.0.7"
+
   haproxy:
     image: 'haproxy:alpine'
     restart: "unless-stopped"
     depends_on:
       - plex
-      - transmission-openvpn
+      - transmission
       - letsencrypt
       - pihole
     volumes:
@@ -44,6 +45,7 @@ services:
       - "443:443"
       - "80:80"
       - "5555:5555"
+
   letsencrypt:
     image: "linuxserver/letsencrypt"
     restart: "unless-stopped"
@@ -58,6 +60,7 @@ services:
       ONLY_SUBDOMAINS: "true"
     volumes:
       - "/home/abrar/docker/letsencrypt:/config"
+      
   transmission:
     image: "haugene/transmission-openvpn"
     restart: "unless-stopped"
