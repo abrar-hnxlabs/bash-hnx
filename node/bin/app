@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env')})
+
 const program = require('commander');
 const winston = require('winston');
 
@@ -11,16 +13,15 @@ const { encrypt, decrypt } = require(path.resolve(__dirname, '..' ,'scripts', 'o
 
 global.log = winston.createLogger({
     level: 'info',
-    format: winston.format.json(),
+    format: winston.format.combine(
+        winston.format.align(),
+        winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        winston.format.printf((info) => `${info.timestamp} ${info.level} : ${info.message}`)
+    ),
     transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: './app.log' })
+        new winston.transports.File({ filename: path.resolve(__dirname, 'app.log') })
     ]
-});
-
-log.on('finish', function (info) {
-    // All `info` log messages has now been logged
-    process.exit(0);
 });
 
 log.info("starting app.");
@@ -42,7 +43,7 @@ if(program.update_dns) {
     updateDnsRecord();
 } else if(program.apply_config) {
     if(!isRootUser){
-        console.log('This operation requires root User. Run again as root.');
+        log.error('This operation requires root User. Run again as root.');
         process.exit(-1);
     }
     doCopy();
@@ -54,6 +55,10 @@ if(program.update_dns) {
     decrypt(program.decrypt)
 }
 else {
-    console.log('use -h --help to get a list of commands');
+    log.info('use -h --help to get a list of commands');
 }
-log.end();
+
+log.info("Exiting app.")
+setTimeout(()=>{
+    console.log("Done.");
+}, 2000);

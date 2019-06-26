@@ -5,7 +5,10 @@ const ipQueryUrl = 'http://ipinfo.io/ip';
 const domains = ['plex.hnxlabs.com'];
 
 const getAuthToken = (hostname) => {
-    return process.env[`${hostname.toUpperCase()}.TOKEN`];
+    const user = process.env[`${hostname.toUpperCase()}.USER`];
+    const pass = process.env[`${hostname.toUpperCase()}.PASS`];
+    const token = Buffer.from(`${user}:${pass}`).toString('base64');
+    return token;
 }
 const getIp = async () => {
     const ipResp = await axios.get(ipQueryUrl);
@@ -19,7 +22,9 @@ const getIp = async () => {
 }
 
 const updateDnsRecord = async ()=> {
+    log.info('dyndns: getting ip address');
     const ip = await getIp();
+    log.info(`dyndns: got ip as -> ${ip}`);
     const results = [];
     for (let hostname of domains) {
         const dns = await axios({
@@ -35,6 +40,7 @@ const updateDnsRecord = async ()=> {
         });
         results.push(dns.data);   
     };
+    log.info(`dyndns: done update for -> ${results.join(', ')}`);
 }
 
 module.exports = { updateDnsRecord };

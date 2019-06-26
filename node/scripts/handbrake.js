@@ -2,6 +2,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const execEncode = (inputfilePath) => {
+    log.info(`handbrake: starting file encode, ${inputfilePath}`)
     inputfilePath = path.normalize(inputfilePath);
     const baseFileObj = path.parse(inputfilePath);
     
@@ -17,8 +18,9 @@ const execEncode = (inputfilePath) => {
         ]
         execSync( args.join(' '), { stdio: 'inherit' });
     } catch (e){
-        console.log('Error while exec handbrake', e);
+        log.error('handbrake: Error while exec handbrake', e);
     }
+    log.info('handbrake: file encoding done')
 }
 
 module.exports = { execEncode };
