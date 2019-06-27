@@ -39,14 +39,21 @@ function isRootUser() {
     return process.getuid() === 0;
 }
 
+function shutdown(exitCode) {
+    setTimeout(()=>{
+        process.exit(exitCode);
+    }, 2000);
+}
+
 if(program.update_dns) {
     updateDnsRecord();
 } else if(program.apply_config) {
     if(!isRootUser()){
         log.error('This operation requires root User. Run again as root.');
-        process.exit(-1);
+        shutdown(1);
+    } else {
+        doCopy();
     }
-    doCopy();
 } else if(program.transcode){
     execEncode(program.transcode)
 } else if(program.encrypt){
@@ -57,7 +64,4 @@ if(program.update_dns) {
 else {
     log.info('use -h --help to get a list of commands');
 }
-
-setTimeout(()=>{
-    process.exit(0);
-}, 2000);
+shutdown();
