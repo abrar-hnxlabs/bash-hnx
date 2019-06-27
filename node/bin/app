@@ -39,7 +39,7 @@ function isRootUser() {
     return process.getuid() === 0;
 }
 
-function shutdown(exitCode) {
+function shutdown(exitCode = 0) {
     setTimeout(()=>{
         process.exit(exitCode);
     }, 2000);
