@@ -44,33 +44,37 @@ function isRootUser() {
 function shutdown(exitCode = 0) {
     setTimeout(()=>{
         process.exit(exitCode);
-    }, 2000);
+    }, 1000);
 }
 
-if(program.update_dns) {
-    updateDnsRecord();
-}  else if(program.transcode){
-    execEncode(program.transcode)
-} else if(program.encrypt){
-    encrypt(program.encrypt)
-} else if(program.decrypt){
-    decrypt(program.decrypt)
-} else if (program.restart_docker){
-    if(!isRootUser()){
-        log.error('This operation requires root User. Run again as root.');
-        shutdown(1);
-    } else {
-        dockerRestart();
+async function run(program) {
+    if(program.update_dns) {
+        await updateDnsRecord();
+    }  else if(program.transcode){
+        execEncode(program.transcode)
+    } else if(program.encrypt){
+        await encrypt(program.encrypt)
+    } else if(program.decrypt){
+        await decrypt(program.decrypt)
+    } else if (program.restart_docker){
+        if(!isRootUser()){
+            log.error('This operation requires root User. Run again as root.');
+            shutdown(1);
+        } else {
+            await dockerRestart();
+        }
+    } else if(program.apply_config) {
+        if(!isRootUser()){
+            log.error('This operation requires root User. Run again as root.');
+            shutdown(1);
+        } else {
+            await doCopy();
+        }
     }
-} else if(program.apply_config) {
-    if(!isRootUser()){
-        log.error('This operation requires root User. Run again as root.');
-        shutdown(1);
-    } else {
-        doCopy();
+    else {
+        log.info('use -h --help to get a list of commands');
     }
 }
-else {
-    log.info('use -h --help to get a list of commands');
-}
+
+await run(program);
 shutdown();
