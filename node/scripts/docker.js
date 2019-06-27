@@ -6,8 +6,8 @@ const dockerRestart = async () => {
     const dockerfile = path.resolve(__dirname, '..', '..', 'docker', 'docker-compose.yml');
     log.info(`docker: restarting for -> ${dockerfile}`);
     try {
-    await exec(`docker-compose -f dockerfile down`);
-    await exec(`docker-compose -f dockerfile up -d`);
+    await exec(`docker-compose -f ${dockerfile} down`);
+    await exec(`docker-compose -f ${dockerfile} up -d`);
     } catch (e) {
         log.error('Error while restarting docker.',e)
     }
