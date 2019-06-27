@@ -9,6 +9,7 @@ const { updateDnsRecord } = require(path.resolve(__dirname, '..' ,'scripts','dyn
 const { doCopy } = require(path.resolve(__dirname, '..' ,'scripts', 'apply-config.js'));
 const { execEncode } = require(path.resolve(__dirname, '..' ,'scripts', 'handbrake.js'));
 const { encrypt, decrypt } = require(path.resolve(__dirname, '..' ,'scripts', 'openssl.js'));
+const { dockerRestart } = require(path.resolve(__dirname, '..' ,'scripts', 'docker.js'));
 
 
 global.log = winston.createLogger({
@@ -33,6 +34,7 @@ program
     .option('-t --transcode <inputFile>', 'transcode to h265 10 bit video')
     .option('-e --encrypt <inputFile>', 'encrypt file')
     .option('-d --decrypt <inputFile>', 'decrypt file')
+    .option('-r --restart_docker', 'restart the docker containers')
     .parse(process.argv);
 
 function isRootUser() {
@@ -47,6 +49,19 @@ function shutdown(exitCode = 0) {
 
 if(program.update_dns) {
     updateDnsRecord();
+}  else if(program.transcode){
+    execEncode(program.transcode)
+} else if(program.encrypt){
+    encrypt(program.encrypt)
+} else if(program.decrypt){
+    decrypt(program.decrypt)
+} else if (program.restart_docker){
+    if(!isRootUser()){
+        log.error('This operation requires root User. Run again as root.');
+        shutdown(1);
+    } else {
+        dockerRestart();
+    }
 } else if(program.apply_config) {
     if(!isRootUser()){
         log.error('This operation requires root User. Run again as root.');
@@ -54,12 +69,6 @@ if(program.update_dns) {
     } else {
         doCopy();
     }
-} else if(program.transcode){
-    execEncode(program.transcode)
-} else if(program.encrypt){
-    encrypt(program.encrypt)
-} else if(program.decrypt){
-    decrypt(program.decrypt)
 }
 else {
     log.info('use -h --help to get a list of commands');
