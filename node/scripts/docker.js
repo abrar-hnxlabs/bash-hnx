@@ -9,7 +9,7 @@ const dockerRestart = async () => {
     await exec(`docker-compose -f dockerfile down`);
     await exec(`docker-compose -f dockerfile up -d`);
     } catch (e) {
-        log.error('Error while restarting docker.')
+        log.error('Error while restarting docker.',e)
     }
     log.info(`docker: done restart`)
 }
