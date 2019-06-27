@@ -24,7 +24,7 @@ global.log = winston.createLogger({
     ]
 });
 
-log.info("starting app.");
+log.info("Starting app.");
 
 program
     .version('1.0.0')
@@ -42,7 +42,7 @@ function isRootUser() {
 if(program.update_dns) {
     updateDnsRecord();
 } else if(program.apply_config) {
-    if(!isRootUser){
+    if(!isRootUser()){
         log.error('This operation requires root User. Run again as root.');
         process.exit(-1);
     }
@@ -58,7 +58,6 @@ else {
     log.info('use -h --help to get a list of commands');
 }
 
-log.info("Exiting app.")
 setTimeout(()=>{
-    console.log("Done.");
+    process.exit(0);
 }, 2000);
