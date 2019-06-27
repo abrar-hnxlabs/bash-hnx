@@ -74,7 +74,8 @@ async function run(program) {
     else {
         log.info('use -h --help to get a list of commands');
     }
+
+    shutdown();
 }
 
-await run(program);
-shutdown();
+run(program);
