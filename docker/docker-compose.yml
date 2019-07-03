@@ -3,8 +3,7 @@ services:
   plex:
     image: "linuxserver/plex"
     restart: "unless-stopped"
-    cap_add:
-      - NET_ADMIN
+    network_mode: "host"
     env_file:
       - "plex.env"
     volumes:
