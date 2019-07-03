@@ -3,12 +3,17 @@ services:
   plex:
     image: "linuxserver/plex"
     restart: "unless-stopped"
+    cap_add:
+      - NET_ADMIN
     env_file:
       - "plex.env"
     volumes:
       - "/home/abrar/media:/data:ro"
       - "/home/abrar/media/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
+    ports:
+      - "1900:1900/udp"
+      - "8200:8200/tcp"
 
   pihole:
     image: "pihole/pihole"
