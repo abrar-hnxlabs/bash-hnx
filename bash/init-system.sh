@@ -21,12 +21,10 @@ if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
     stable"
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
-  curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
   sudo apt-get install -y nodejs
   
-  ln -s /home/abrar/ubuntu-configs/node/bin/app /bin/myapp
+  ln -s /home/abrar/myubuntu/node/bin/app /bin/myapp
   myapp --update_dns
   myapp --apply_config
-  echo "Setting file permissions"
-  chmod -R 775 /home/abrar/media
 fi
