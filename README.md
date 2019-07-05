@@ -31,7 +31,7 @@ _filenames are for illustration purpose, they can have any extension_
 ```
 sudo mount -t ntfs /dev/sdb1 /mnt
 cd /mnt
-rsync -av --progress ~/media backup
+rsync -av --progress ~/media . # this will create a sync copy with media folder included so just append a . at the end
 
 use -n for dry run
 ```
