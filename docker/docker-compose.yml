@@ -70,7 +70,7 @@ services:
     image: "haugene/transmission-openvpn"
     restart: "unless-stopped"
     volumes:
-      - "/storage/data/media:/downloads"
+      - "/storage/data/media:/media"
       - "/etc/localtime:/etc/localtime:ro"
     env_file:
       - "transmission.env"
