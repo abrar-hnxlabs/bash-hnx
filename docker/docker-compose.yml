@@ -24,6 +24,7 @@ services:
       TZ: "America/Los_Angeles"
       DNS1: "8.8.8.8"
       VIRTUAL_HOST: "pihole.hnxlabs.com"
+      WEBPASSWORD: ""
     volumes:
       - "/home/abrar/docker/pihole:/etc/pihole"
       - "/home/abrar/docker/pihole/dnsmasq.d:/etc/dnsmasq.d"
