@@ -7,8 +7,8 @@ services:
     env_file:
       - "plex.env"
     volumes:
-      - "/home/abrar/media:/data:ro"
-      - "/home/abrar/media/transcode:/transcode"
+      - "/storage/media:/data:ro"
+      - "/storage/media/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
       
   pihole:
@@ -28,7 +28,7 @@ services:
       - 127.0.0.1
       - 8.8.8.8
     extra_hosts:
-      - "plex.hnxlabs.com:192.168.0.7"
+      - "plex.hnxlabs.com:192.168.0.3"
 
   haproxy:
     image: 'haproxy:alpine'
@@ -39,7 +39,7 @@ services:
       - letsencrypt
       - pihole
     volumes:
-      - "/home/abrar/ubuntu-configs/docker/configs:/usr/local/etc/haproxy:ro"
+      - "/home/abrar/myubuntu/docker/configs:/usr/local/etc/haproxy:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
       - "/var/lib/haproxy/dev/log:/dev/log"
     ports:
@@ -52,7 +52,7 @@ services:
     restart: "unless-stopped"
     environment:
       PUID: 1000
-      PGID: 998
+      PGID: 1001
       TZ: "America/Los_angeles"
       URL: "hnxlabs.com"
       SUBDOMAINS: "plex,bt,pihole"
@@ -66,7 +66,7 @@ services:
     image: "haugene/transmission-openvpn"
     restart: "unless-stopped"
     volumes:
-      - "/home/abrar/media:/downloads"
+      - "/storage/media:/downloads"
       - "/etc/localtime:/etc/localtime:ro"
     env_file:
       - "transmission.env"
