@@ -4,11 +4,13 @@ services:
     image: "linuxserver/plex"
     restart: "unless-stopped"
     network_mode: "host"
-    env_file:
-      - "plex.env"
+    environment:
+      - PUID=1000
+      - PGID=1001
+      - VERSION=docker
     volumes:
       - "/storage/media:/data:ro"
-      - "/storage/media/transcode:/transcode"
+      - "/storage/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
       
   pihole:
