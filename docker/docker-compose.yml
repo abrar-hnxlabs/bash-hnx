@@ -9,7 +9,7 @@ services:
       - PGID=1001
       - VERSION=docker
     volumes:
-      - "/storage/media:/data:ro"
+      - "/storage/data/media:/data:ro"
       - "/storage/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
       
@@ -70,7 +70,7 @@ services:
     image: "haugene/transmission-openvpn"
     restart: "unless-stopped"
     volumes:
-      - "/storage/media:/downloads"
+      - "/storage/data/media:/downloads"
       - "/etc/localtime:/etc/localtime:ro"
     env_file:
       - "transmission.env"
