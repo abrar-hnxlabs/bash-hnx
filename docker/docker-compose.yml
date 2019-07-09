@@ -60,7 +60,7 @@ services:
       PGID: 1001
       TZ: "America/Los_angeles"
       URL: "hnxlabs.com"
-      SUBDOMAINS: "plex,bt,pihole"
+      SUBDOMAINS: "plex,bt,pihole,hb"
       VALIDATION: "http"
       STAGING: "false"
       ONLY_SUBDOMAINS: "true"
