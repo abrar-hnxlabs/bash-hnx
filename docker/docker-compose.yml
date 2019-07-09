@@ -87,4 +87,7 @@ services:
       TZ: "America/Los_Angeles"
     devices:
       - "/dev/dri:/dev/dri"
-
+    volumes:
+      - "/home/abrar/docker/handbrake:/config:rw"
+      - "/storage/media:/storage:ro"
+      - "/storage/transcode/handbrake:/output:rw"
