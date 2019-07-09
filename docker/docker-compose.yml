@@ -76,4 +76,14 @@ services:
       - "transmission.env"
     cap_add:
       - NET_ADMIN
+  
+  handbrake:
+    image: "jlesage/handbrake"
+    restart: "unless-stopped"
+    environment:
+      USER_ID: 1000
+      GROUP_ID: 1001
+      TZ: "America/Los_Angeles"
+    devices:
+      - "/dev/dri:/dev/dri"
 
