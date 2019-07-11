@@ -32,7 +32,7 @@ services:
       - 127.0.0.1
       - 8.8.8.8
     extra_hosts:
-      - "plex.hnxlabs.com:192.168.0.3"
+      - "plex.hnxlabs.com:192.168.1.65"
 
   haproxy:
     image: 'haproxy:alpine'
@@ -91,3 +91,5 @@ services:
       - "/home/abrar/docker/handbrake:/config:rw"
       - "/storage/media:/storage:ro"
       - "/storage/transcode/handbrake:/output:rw"
+    ports:
+      - "5800:5800/tcp"
