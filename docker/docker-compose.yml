@@ -41,7 +41,7 @@ services:
       - plex
       - transmission
       - letsencrypt
-      - pihole
+      # - pihole
       - handbrake
     volumes:
       - "/home/abrar/myubuntu/docker/configs:/usr/local/etc/haproxy:ro"
