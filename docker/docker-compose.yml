@@ -50,9 +50,8 @@ services:
       - handbrake
       - rsyslog
     volumes:
-      - "/home/abrar/myubuntu/docker/original/configs:/usr/local/etc/haproxy:ro"
+      - "/home/abrar/myubuntu/docker/configs:/usr/local/etc/haproxy:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
-      - "/var/lib/haproxy/dev/log:/dev/log"
     ports:
       - "443:443"
       - "80:80"
