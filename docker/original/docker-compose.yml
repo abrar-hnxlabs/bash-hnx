@@ -90,5 +90,3 @@ services:
       - "/home/abrar/docker/handbrake:/config:rw"
       - "/storage/media:/storage:ro"
       - "/storage/transcode/handbrake:/output:rw"
-    ports:
-      - "5800:5800/tcp"
