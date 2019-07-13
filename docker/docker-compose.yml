@@ -68,7 +68,7 @@ services:
       - handbrake
      # - rsyslog
     volumes:
-      - "/home/abrar/myubuntu/docker/configs/nginx.com:/etc/nginx/nginx.conf:ro"
+      - "/home/abrar/myubuntu/docker/configs/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
     ports:
       - "80:80"
