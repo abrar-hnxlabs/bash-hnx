@@ -13,26 +13,26 @@ services:
       - "/storage/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
       
-  pihole:
-    image: "pihole/pihole"
-    restart: "unless-stopped"
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-    environment:
-      TZ: "America/Los_Angeles"
-      DNS1: "8.8.8.8"
-      VIRTUAL_HOST: "pihole.hnxlabs.com"
-      WEBPASSWORD: ""
-    volumes:
-      - "/home/abrar/docker/pihole:/etc/pihole"
-      - "/home/abrar/docker/pihole/dnsmasq.d:/etc/dnsmasq.d"
-    dns:
-      - 127.0.0.1
-      - 8.8.8.8
-    extra_hosts:
-      - "plex.hnxlabs.com:192.168.1.65"
+  # pihole:
+  #   image: "pihole/pihole"
+  #   restart: "unless-stopped"
+  #   ports:
+  #     - "53:53/tcp"
+  #     - "53:53/udp"
+  #     - "67:67/udp"
+  #   environment:
+  #     TZ: "America/Los_Angeles"
+  #     DNS1: "8.8.8.8"
+  #     VIRTUAL_HOST: "pihole.hnxlabs.com"
+  #     WEBPASSWORD: ""
+  #   volumes:
+  #     - "/home/abrar/docker/pihole:/etc/pihole"
+  #     - "/home/abrar/docker/pihole/dnsmasq.d:/etc/dnsmasq.d"
+  #   dns:
+  #     - 127.0.0.1
+  #     - 8.8.8.8
+  #   extra_hosts:
+  #     - "plex.hnxlabs.com:192.168.1.65"
 
   haproxy:
     image: 'haproxy:alpine'
@@ -41,7 +41,6 @@ services:
       - plex
       - transmission
       - letsencrypt
-      - pihole
       - handbrake
     volumes:
       - "/home/abrar/myubuntu/docker/configs:/usr/local/etc/haproxy:ro"
