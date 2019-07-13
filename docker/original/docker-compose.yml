@@ -12,6 +12,12 @@ services:
       - "/storage/media:/data:ro"
       - "/storage/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
+  rsyslog:
+    image: "rsyslog/syslog_appliance_alpine"
+    restart: "unless-stopped"
+    volumes:
+      - "/home/abrar/docker/logs:/logs"
+    
       
   # pihole:
   #   image: "pihole/pihole"
@@ -42,6 +48,7 @@ services:
       - transmission
       - letsencrypt
       - handbrake
+      - rsyslog
     volumes:
       - "/home/abrar/myubuntu/docker/original/configs:/usr/local/etc/haproxy:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
