@@ -58,7 +58,7 @@ services:
   #     - "80:80"
   #     - "5555:5555"
 
-nginx:
+  nginx:
     image: 'nginx:alpine'
     restart: "unless-stopped"
     depends_on:
