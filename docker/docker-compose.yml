@@ -12,11 +12,12 @@ services:
       - "/storage/media:/data:ro"
       - "/storage/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"
-  rsyslog:
-    image: "rsyslog/syslog_appliance_alpine"
-    restart: "unless-stopped"
-    volumes:
-      - "/home/abrar/docker/logs:/logs"
+
+  # rsyslog:
+  #   image: "rsyslog/syslog_appliance_alpine"
+  #   restart: "unless-stopped"
+  #   volumes:
+  #     - "/home/abrar/docker/logs:/logs"
     
       
   # pihole:
@@ -40,22 +41,37 @@ services:
   #   extra_hosts:
   #     - "plex.hnxlabs.com:192.168.1.65"
 
-  haproxy:
-    image: 'haproxy:alpine'
+  # haproxy:
+  #   image: 'haproxy:alpine'
+  #   restart: "unless-stopped"
+  #   depends_on:
+  #     - plex
+  #     - transmission
+  #     - letsencrypt
+  #     - handbrake
+  #     - rsyslog
+  #   volumes:
+  #     - "/home/abrar/myubuntu/docker/configs:/usr/local/etc/haproxy:ro"
+  #     - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
+  #   ports:
+  #     - "443:443"
+  #     - "80:80"
+  #     - "5555:5555"
+
+haproxy:
+    image: 'nginx:alpine'
     restart: "unless-stopped"
     depends_on:
       - plex
       - transmission
       - letsencrypt
       - handbrake
-      - rsyslog
+     # - rsyslog
     volumes:
-      - "/home/abrar/myubuntu/docker/configs:/usr/local/etc/haproxy:ro"
+      - "/home/abrar/myubuntu/docker/configs/nginx.com:/etc/nginx/nginx.conf:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
     ports:
-      - "443:443"
       - "80:80"
-      - "5555:5555"
 
   letsencrypt:
     image: "linuxserver/letsencrypt"
