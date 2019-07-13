@@ -58,7 +58,7 @@ services:
       PGID: 1001
       TZ: "America/Los_angeles"
       URL: "hnxlabs.com"
-      SUBDOMAINS: "plex,bt,pihole,hb"
+      SUBDOMAINS: "plex,bt"
       VALIDATION: "http"
       STAGING: "false"
       ONLY_SUBDOMAINS: "true"
@@ -89,3 +89,5 @@ services:
       - "/home/abrar/docker/handbrake:/config:rw"
       - "/storage/media:/storage:ro"
       - "/storage/transcode/handbrake:/output:rw"
+    ports:
+      - "5800:5800"
