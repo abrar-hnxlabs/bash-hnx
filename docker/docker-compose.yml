@@ -11,14 +11,7 @@ services:
     volumes:
       - "/storage/media:/data:ro"
       - "/storage/transcode:/transcode"
-      - "/home/abrar/docker/plex/config:/config"
-
-  rsyslog:
-    image: "rsyslog/syslog_appliance_alpine"
-    restart: "unless-stopped"
-    volumes:
-      - "/home/abrar/docker/logs:/logs"
-    
+      - "/home/abrar/docker/plex/config:/config"  
       
   # pihole:
   #   image: "pihole/pihole"
@@ -49,30 +42,13 @@ services:
       - transmission
       - letsencrypt
       - handbrake
-      - rsyslog
     volumes:
       - "/home/abrar/myubuntu/docker/configs/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
     ports:
-      - "44443:44443"
+      - "443:443"
       - "80:80"
       - "5555:5555"
-
-  # nginx:
-  #   image: 'nginx:alpine'
-  #   restart: "unless-stopped"
-  #   depends_on:
-  #     - plex
-  #     - transmission
-  #     - letsencrypt
-  #     - handbrake
-  #    # - rsyslog
-  #   volumes:
-  #     - "/home/abrar/myubuntu/docker/configs/nginx.conf:/etc/nginx/nginx.conf:ro"
-  #     - "/home/abrar/docker/letsencrypt/etc/letsencrypt/archive:/ssl:ro"
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
 
   letsencrypt:
     image: "linuxserver/letsencrypt"
