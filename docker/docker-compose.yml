@@ -75,6 +75,8 @@ services:
       - "transmission.env"
     cap_add:
       - NET_ADMIN
+    ports:
+      - "9091:9091"
   
   handbrake:
     image: "jlesage/handbrake"
