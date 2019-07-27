@@ -10,6 +10,7 @@ const { doCopy } = require(path.resolve(__dirname, '..' ,'scripts', 'apply-confi
 const { execEncode } = require(path.resolve(__dirname, '..' ,'scripts', 'handbrake.js'));
 const { encrypt, decrypt } = require(path.resolve(__dirname, '..' ,'scripts', 'openssl.js'));
 const { dockerRestart } = require(path.resolve(__dirname, '..' ,'scripts', 'docker.js'));
+const { printLogs } = require(path.resolve(__dirname, '..' ,'scripts', 'logs.js'));
 
 
 global.log = winston.createLogger({
@@ -35,6 +36,7 @@ program
     .option('-e --encrypt <inputFile>', 'encrypt file')
     .option('-d --decrypt <inputFile>', 'decrypt file')
     .option('-r --restart_docker', 'restart the docker containers')
+    .option('-l --logs', 'print application logs')
     .parse(process.argv);
 
 function isRootUser() {
@@ -56,7 +58,9 @@ async function run(program) {
         await encrypt(program.encrypt)
     } else if(program.decrypt){
         await decrypt(program.decrypt)
-    } else if (program.restart_docker){
+    } else if(program.logs){
+        await printLogs()
+    }  else if (program.restart_docker){
         if(!isRootUser()){
             log.error('This operation requires root User. Run again as root.');
             shutdown(1);
