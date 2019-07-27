@@ -46,7 +46,7 @@ services:
       - "/home/abrar/myubuntu/docker/configs/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
     ports:
-      - "443:443"
+      - "8081:443"
       - "80:80"
       - "5555:5555"
 
