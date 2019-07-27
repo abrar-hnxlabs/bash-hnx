@@ -61,12 +61,7 @@ async function run(program) {
     } else if(program.logs){
         await printLogs()
     }  else if (program.restart_docker){
-        if(!isRootUser()){
-            log.error('This operation requires root User. Run again as root.');
-            shutdown(1);
-        } else {
-            await dockerRestart();
-        }
+        await dockerRestart();
     } else if(program.apply_config) {
         if(!isRootUser()){
             log.error('This operation requires root User. Run again as root.');
