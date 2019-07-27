@@ -11,60 +11,8 @@ services:
     volumes:
       - "/storage/media:/data:ro"
       - "/storage/transcode:/transcode"
-      - "/home/abrar/docker/plex/config:/config"  
-      
-  # pihole:
-  #   image: "pihole/pihole"
-  #   restart: "unless-stopped"
-  #   ports:
-  #     - "53:53/tcp"
-  #     - "53:53/udp"
-  #     - "67:67/udp"
-  #   environment:
-  #     TZ: "America/Los_Angeles"
-  #     DNS1: "8.8.8.8"
-  #     VIRTUAL_HOST: "pihole.hnxlabs.com"
-  #     WEBPASSWORD: ""
-  #   volumes:
-  #     - "/home/abrar/docker/pihole:/etc/pihole"
-  #     - "/home/abrar/docker/pihole/dnsmasq.d:/etc/dnsmasq.d"
-  #   dns:
-  #     - 127.0.0.1
-  #     - 8.8.8.8
-  #   extra_hosts:
-  #     - "plex.hnxlabs.com:192.168.1.65"
-
-  haproxy:
-    image: 'haproxy:alpine'
-    restart: "unless-stopped"
-    depends_on:
-      - plex
-      - transmission
-      - letsencrypt
-      - handbrake
-    volumes:
-      - "/home/abrar/myubuntu/docker/configs/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
-      - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
-    ports:
-      - "8081:443"
-      - "80:80"
-      - "5555:5555"
-
-  letsencrypt:
-    image: "linuxserver/letsencrypt"
-    restart: "unless-stopped"
-    environment:
-      PUID: 1000
-      PGID: 1001
-      TZ: "America/Los_angeles"
-      URL: "hnxlabs.com"
-      SUBDOMAINS: "plex,bt"
-      VALIDATION: "http"
-      STAGING: "false"
-      ONLY_SUBDOMAINS: "true"
-    volumes:
-      - "/home/abrar/docker/letsencrypt:/config"
-      
+      - "/home/abrar/docker/plex/config:/config"
+          
   transmission:
     image: "haugene/transmission-openvpn"
     restart: "unless-stopped"
