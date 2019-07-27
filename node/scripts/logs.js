@@ -6,7 +6,7 @@ const readFile = util.promisify(fs.readFile);
 module.exports = {
     printLogs: async () => {
         const logPath = path.resolve(__dirname, '..', 'bin', 'app.log');
-        const logs = await readFile(logPath);
+        const logs = await readFile(logPath, 'utf-8');
         console.log(logs);
     }
 }
