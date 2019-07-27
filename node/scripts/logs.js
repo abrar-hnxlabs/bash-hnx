@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const util = require('utils');
+const util = require('util');
 
 const readFile = util.promisify(fs.readFile);
 module.exports = {
