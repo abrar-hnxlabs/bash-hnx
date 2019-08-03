@@ -46,9 +46,9 @@ services:
       - "/home/abrar/myubuntu/docker/configs/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
     ports:
-      - "8081:443"
-      - "80:80"
-      - "5555:5555"
+      - "32400:32400"
+      - "9091:9091"
+      - "5800:5800"
 
   letsencrypt:
     image: "linuxserver/letsencrypt"
@@ -75,8 +75,6 @@ services:
       - "transmission.env"
     cap_add:
       - NET_ADMIN
-    ports:
-      - "9091:9091"
   
   handbrake:
     image: "jlesage/handbrake"
@@ -91,5 +89,3 @@ services:
       - "/home/abrar/docker/handbrake:/config:rw"
       - "/storage/media:/storage:ro"
       - "/storage/transcode/handbrake:/output:rw"
-    ports:
-      - "5800:5800"
