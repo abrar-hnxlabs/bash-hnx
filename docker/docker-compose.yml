@@ -3,7 +3,7 @@ services:
   plex:
     image: "linuxserver/plex"
     restart: "unless-stopped"
-    network_mode: "host"
+    # network_mode: "host"
     environment:
         PUID: 1000
         PGID: 1001
@@ -40,7 +40,6 @@ services:
     depends_on:
       - plex
       - transmission
-      - letsencrypt
       - handbrake
     volumes:
       - "/home/abrar/myubuntu/docker/configs/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
@@ -64,6 +63,8 @@ services:
       ONLY_SUBDOMAINS: "true"
     volumes:
       - "/home/abrar/docker/letsencrypt:/config"
+    ports:
+      - "80:80"
       
   transmission:
     image: "haugene/transmission-openvpn"
