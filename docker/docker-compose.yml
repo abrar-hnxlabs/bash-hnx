@@ -12,6 +12,8 @@ services:
       - "/storage/media:/data:ro"
       - "/storage/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"  
+    ports:
+      - "1900:1900/udp"
       
   # pihole:
   #   image: "pihole/pihole"
@@ -45,9 +47,7 @@ services:
       - "/home/abrar/myubuntu/docker/configs/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
       - "/home/abrar/docker/letsencrypt/etc/letsencrypt/live:/ssl:ro"
     ports:
-      - "4431:443"
-      - "4432:443"
-      - "4433:443"
+      - "443:443"
       - "4434:4434"
 
   letsencrypt:
