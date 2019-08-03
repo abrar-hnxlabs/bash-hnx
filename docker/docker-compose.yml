@@ -50,20 +50,20 @@ services:
       - "4432:443"
       - "4433:443"
 
-        # letsencrypt:
-        #image: "linuxserver/letsencrypt"
-        #restart: "unless-stopped"
-        #environment:
-        #PUID: 1000
-        #PGID: 1001
-        #TZ: "America/Los_angeles"
-        #URL: "hnxlabs.com"
-        #SUBDOMAINS: "plex,bt"
-        #VALIDATION: "http"
-        #STAGING: "false"
-        #ONLY_SUBDOMAINS: "true"
-        #volumes:
-        #- "/home/abrar/docker/letsencrypt:/config"
+  letsencrypt:
+    image: "linuxserver/letsencrypt"
+    restart: "unless-stopped"
+    environment:
+      PUID: 1000
+      PGID: 1001
+      TZ: "America/Los_angeles"
+      URL: "hnxlabs.com"
+      SUBDOMAINS: "plex,bt"
+      VALIDATION: "http"
+      STAGING: "true"
+      ONLY_SUBDOMAINS: "true"
+    volumes:
+      - "/home/abrar/docker/letsencrypt:/config"
       
   transmission:
     image: "haugene/transmission-openvpn"
