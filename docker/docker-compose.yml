@@ -3,7 +3,7 @@ services:
   plex:
     image: "linuxserver/plex"
     restart: "unless-stopped"
-    # network_mode: "host"
+    network_mode: "host"
     environment:
         PUID: 1000
         PGID: 1001
@@ -12,9 +12,7 @@ services:
       - "/storage/media:/data:ro"
       - "/storage/transcode:/transcode"
       - "/home/abrar/docker/plex/config:/config"  
-    ports:
-      - "1900:1900/udp"
-      
+
   # pihole:
   #   image: "pihole/pihole"
   #   restart: "unless-stopped"
