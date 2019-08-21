@@ -14,8 +14,4 @@ if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
 			      whois
   curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
   sudo apt-get install -y nodejs
-  
-  ln -s /home/abrar/myubuntu/node/bin/app /bin/myapp
-  myapp --update_dns
-  myapp --apply_config
 fi
