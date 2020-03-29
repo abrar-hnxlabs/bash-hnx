@@ -74,3 +74,19 @@ Unban ip's
 ```
 sudo fail2ban-client set sshd unbanip IP_ADDRESS
 ```
+
+## Screen
+Detach
+```
+ctrl+a , then d
+```
+
+List
+```
+screen -ls
+```
+
+re-attach
+```
+screen -r # attaches to already existing screen command or creates a new one.
+```
