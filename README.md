@@ -36,6 +36,22 @@ rsync -av --progress ~/media . # this will create a sync copy with media folder 
 use -n for dry run
 ```
 
+## Initialize new HDD
+```
+sudo fdisk -l # to list the disks
+sudo fdisk /dev/sda # select a disk
+
+# within fdisk prompt
+g # for new gpt partition table
+w # write and exit
+
+# format the new partition
+
+sudo fdisk -l // to get the device path for new parition
+
+sudo mkfs -t ext4 /dev/sda1
+```
+
 ## Fstab - Auto mount external hdd on boot
 Get the UUID of the disk to mount , run the below command
 ```
